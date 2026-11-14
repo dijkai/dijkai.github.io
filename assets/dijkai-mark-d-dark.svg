@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Dijk AI">
+  <defs>
+    <clipPath id="polder"><path d="M53 33 H60 A27 27 0 0 1 60 87 H53 Z"/></clipPath>
+  </defs>
+  <!-- sea outside the dike -->
+  <g fill="none" stroke="#5FA8D3" stroke-width="4.5" stroke-linecap="round">
+    <path d="M6 48 q4 -4 8 0 t8 0 t8 0"/>
+    <path d="M6 60 q4 -4 8 0 t8 0 t8 0"/>
+    <path d="M6 72 q4 -4 8 0 t8 0 t8 0"/>
+  </g>
+  <!-- the D: its stem is the dike -->
+  <path d="M43 23 H60 A37 37 0 0 1 60 97 H43 Z" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linejoin="round"/>
+  <!-- the protected polder, in layers -->
+  <g clip-path="url(#polder)">
+    <rect x="50" y="33" width="40" height="14" fill="#F28C28"/>
+    <rect x="50" y="53" width="40" height="14" fill="#9CC3E0"/>
+    <rect x="50" y="73" width="40" height="14" fill="#5FA8D3"/>
+  </g>
+</svg>
