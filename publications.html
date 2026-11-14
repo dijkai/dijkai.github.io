@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publications — dijkai</title>
+<meta name="description" content="Dijk AI is an Amsterdam-based research community making advanced AI safe, secure and well governed.">
+<meta name="theme-color" content="#050E1F">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="grid"></div><div class="glow a"></div><div class="glow b"></div>
+
+<header>
+  <div class="wrap"><nav>
+    <a href="index.html" aria-label="dijkai home"><img src="assets/dijkai-logo-d-dark.svg" alt="dijkai"></a>
+    <ul><li><a href="index.html#philosophy">Philosophy</a></li><li><a href="index.html#do">What we do</a></li><li><a href="publications.html" style="color:var(--sea)">Publications</a></li><li><a href="index.html#join">Join</a></li></ul>
+  </nav></div>
+</header>
+
+<main>
+  <section style="padding-top:90px"><div class="wrap">
+    <div class="eyebrow">// Publications</div>
+    <h1 style="font-size:clamp(40px,7vw,80px);margin:18px 0 16px">Work from our <span class="g">members.</span></h1>
+    <p class="sub">Papers, briefs, evaluations and tools by Dijk AI members.</p>
+    <div class="pubs" id="pubs-list"></div>
+  </div></section>
+</main>
+
+<svg class="wave" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true"><path fill="none" stroke="#5FA8D3" stroke-width="2" d="M0 45 q25 -30 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0"/></svg>
+<footer><div class="wrap"><img src="assets/dijkai-mark-d-dark.svg" alt="dijkai"><span>© 2026 Dijk AI · Amsterdam</span><a href="publications.html">Publications</a><span>Build before the flood.</span></div></footer>
+
+<script src="assets/site.js"></script>
+<script>
+// publications
+// To add a publication, append an object to this list.
+const PUBS=[
+  {
+    "title": "A Laptop-Scale Recipe for Issue Localization: Precise Shortlists Let a 2B Gemma",
+    "authors": [
+      {
+        "name": "Abdurrachman Mappuji",
+        "url": "https://orcid.org/0000-0002-3704-829X"
+      }
+    ],
+    "date": "2026-11-12",
+    "type": "Paper",
+    "tags": [
+      "Evaluation",
+      "Agents"
+    ],
+    "summary": "BM25 shortlists plus a small local Gemma 4 E2B model put a gold file in the top three for 65.6% of 125 real issues, with no fine-tuning.",
+    "doi": "10.5281/zenodo.24174958",
+    "pdf": "https://zenodo.org/records/24174958/files/main.pdf"
+  },
+  {
+    "title": "Benign Drift As A Swarm's Weak Link: Aggregation, Peer Framing And What A Drifted Agent Still Knows",
+    "authors": [
+      {
+        "name": "Abdurrachman Mappuji",
+        "url": "https://orcid.org/0000-0002-3704-829X"
+      }
+    ],
+    "date": "2026-11-08",
+    "type": "Paper",
+    "tags": [
+      "Alignment",
+      "Multi-agent safety"
+    ],
+    "summary": "One benignly drifted agent in a pool of five raises the share of harmful requests answered from 6.5% to 41% when requesters can retry.",
+    "doi": "10.5281/zenodo.24057173",
+    "pdf": "https://zenodo.org/records/24057173/files/main_apart.pdf"
+  },
+  {
+    "title": "Repairing Safety Drift Without Retraining in Small Fine-Tuned Language Models: Weight-Space Methods and a Located Refusal Direction",
+    "authors": [
+      {
+        "name": "Abdurrachman Mappuji",
+        "url": "https://orcid.org/0000-0002-3704-829X"
+      }
+    ],
+    "date": "2026-11-07",
+    "type": "Paper",
+    "tags": [
+      "Alignment",
+      "Security"
+    ],
+    "summary": "Benign fine-tuning cut refusal from 93.5% to 59.5%. Ten training-free repairs are compared, including a causal refusal direction found in layers 14 and above.",
+    "doi": "10.5281/zenodo.24040671",
+    "pdf": "https://zenodo.org/records/24040671/files/main.pdf"
+  }
+];
+(list=>{
+  const el=document.getElementById('pubs-list'),esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  el.innerHTML=list.sort((a,b)=>b.date.localeCompare(a.date)).map(p=>{
+    const d=p.date.slice(0,4);
+    const by=p.authors.map(a=>a.url?`<a href="${esc(a.url)}">${esc(a.name)}</a>`:esc(a.name)).join(', ');
+    const links=[p.doi&&`<a href="https://doi.org/${esc(p.doi)}">DOI</a>`,p.pdf&&`<a href="${esc(p.pdf)}">PDF</a>`,p.code&&`<a href="${esc(p.code)}">Code</a>`].filter(Boolean).join('');
+    return `<article class="pub rv in"><div class="when">${d}</div><div><h3>${esc(p.title)}</h3><div class="by">Member · ${by}</div><p>${esc(p.summary)}</p>
+      <div class="meta"><span class="chip t">${esc(p.type)}</span>${(p.tags||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join('')}${links}</div></div></article>`}).join('')+`<a class="pub rv in" href="https://signal.group/#CjQKIAaecCToTzwMfxDDh-TfAbTLFdaPkOCjRC9LMuZn4zvzEhC6xU5ui7pOBZY4VML5RjUW" style="border-style:dashed"><div class="when">Next</div><div><h3>Your work could be here</h3><p>Share a paper, brief, evaluation or tool with the community. Join our Signal group.</p></div></a>`;
+})(PUBS);
+</script>
+</body>
+</html>
